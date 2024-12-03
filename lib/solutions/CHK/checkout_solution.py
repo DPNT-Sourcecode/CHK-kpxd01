@@ -4,6 +4,14 @@ SPECIAL_OFFERS = {"A": (3, 130), "B": (2, 45)}
 
 
 def checkout(skus):
+    """Calculate the total price of a number of items
+
+    Args:
+        skus (str): a string containing the SKUs of all the products in the basket
+
+    Returns:
+        int: an integer representing the total checkout value of the items, returns -1 if illegal input
+    """
     # Count occurrences of each item in skus
     item_counts = {}
 
@@ -41,5 +49,6 @@ def checkout(skus):
             total_price += count * PRICES[item]
 
     return total_price
+
 
 
