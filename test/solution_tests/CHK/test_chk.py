@@ -2,7 +2,11 @@ from solutions.CHK import checkout_solution as cs
 
 
 def test_get_item_counts():
-    # Check
+    # Check one input
+    assert cs.get_item_counts("A") == {"A": 1}
+    assert cs.get_item_counts("B") == {"B": 1}
+
+    # Check multiple inputs
     assert cs.get_item_counts("ABCDE") == {
         "A": 1,
         "B": 1,
@@ -10,13 +14,13 @@ def test_get_item_counts():
         "D": 1,
         "E": 1,
     }
-    assert cs.get_item_counts("A") == {"A": 1}
-    assert cs.get_item_counts("B") == {"B": 1}
     assert cs.get_item_counts("AA") == {"A": 2}
     assert cs.get_item_counts("ABABA") == {"A": 3, "B": 2}
     assert cs.get_item_counts("AB") == {"A": 1, "B": 1}
     assert cs.get_item_counts("BA") == {"A": 1, "B": 1}
     assert cs.get_item_counts("AC") == {"A": 1, "C": 1}
+
+    # Check invalid inputs
     assert cs.get_item_counts("") == {}
     assert cs.get_item_counts("F") == {}
     assert cs.get_item_counts("AF") == {}
@@ -119,6 +123,7 @@ def test_mixed_offers():
     assert cs.checkout("AAABEE") == 210
     assert cs.checkout("AAAAABEE") == 280
     assert cs.checkout("BBBEE") == 125
+
 
 
 
