@@ -248,6 +248,22 @@ def test_free_items():
     assert cs.checkout("RRRQ") == 150
 
 
+def test_grouped_discounts():
+    assert cs.checkout("SSS") == 45
+    assert cs.checkout("SSSS") == 65
+    assert cs.checkout("TTT") == 45
+    assert cs.checkout("TTTT") == 65
+    assert cs.checkout("XXX") == 45
+    assert cs.checkout("XXXX") == 62
+    assert cs.checkout("YYY") == 45
+    assert cs.checkout("YYYY") == 65
+    assert cs.checkout("ZZZ") == 45
+    assert cs.checkout("ZZZZ") == 66
+    assert cs.checkout("SSZZZ") == 85
+    assert cs.checkout("SSSXX") == 79
+    assert cs.checkout("SSXXXZZ") == 107
+
+
 def test_combined_discounts():
     assert cs.checkout("EEFFFF") == 110
     assert cs.checkout("AAABEE") == 210
@@ -258,6 +274,7 @@ def test_combined_discounts():
     assert cs.checkout("RRRQQQ") == 210
     assert cs.checkout("KKVVVVV") == 340
     assert cs.checkout("PPPPPGGG") == 260
+
 
 
 
