@@ -26,6 +26,14 @@ def get_item_counts(skus):
 
 
 def apply_free_offers(item_counts):
+    """Update the number of items based on free offers
+
+    Args:
+        item_counts (dict): dictionary containing the amount of items
+
+    Returns:
+        dict: dictionary containing the amount of items after applying free offers
+    """
     updated_counts = item_counts.copy()
     for item, offers in SPECIAL_OFFERS["FREE"].items():
         for offer in offers:
@@ -40,6 +48,14 @@ def apply_free_offers(item_counts):
 
 
 def get_total_price(item_counts):
+    """Return the total price for all the items, applying potential discounts
+
+    Args:
+        item_counts (dict): dictionary containing the amount of items
+
+    Returns:
+        int: an integer representing the total checkout value of the items
+    """
     total_price = 0
     for item, count in item_counts.items():
         # If the item is in the special offers, process special offer first
@@ -91,5 +107,6 @@ def checkout(skus):
     total_price = get_total_price(updated_counts)
 
     return total_price
+
 
 
