@@ -14,6 +14,19 @@ def test_get_item_counts():
     assert cs.get_item_counts("BA") == {"A": 1, "B": 1}
     assert cs.get_item_counts("AC") == {"A": 1, "C": 1}
     assert cs.get_item_counts("") == {}
+    assert cs.get_item_counts("F") == {}
+    assert cs.get_item_counts("AF") == {}
+    assert cs.get_item_counts("FA") == {}
+
+
+def test_apply_free_offers():
+    assert cs.apply_free_offers({"B": 0, "E": 2}) == {"B": 0, "E": 2}
+    assert cs.apply_free_offers({"B": 1, "E": 2}) == {"B": 0, "E": 2}
+    assert cs.apply_free_offers({"B": 2, "E": 2}) == {"B": 1, "E": 2}
+    assert cs.apply_free_offers({"B": 1, "E": 4}) == {"B": 0, "E": 4}
+    assert cs.apply_free_offers({"B": 2, "E": 4}) == {"B": 0, "E": 4}
+    assert cs.apply_free_offers({"B": 3, "E": 4}) == {"B": 1, "E": 4}
+    assert cs.apply_free_offers({"A": 2, "B": 3, "E": 4}) == {"A": 2, "B": 1, "E": 4}
 
 
 def test_single_items():
@@ -34,7 +47,7 @@ def test_invalid_input():
 
 
 def test_empty_basket():
-    assert cs.checkout("") == 0
+    assert cs.checkout("") == -1
 
 
 def test_multiple_items_no_special_offers():
@@ -69,16 +82,6 @@ def test_multiple_items_special_offers():
     assert cs.checkout("AAAABBB") == 255
 
 
-def test_apply_free_offers():
-    assert cs.apply_free_offers({"B": 0, "E": 2}) == {"B": 0, "E": 2}
-    assert cs.apply_free_offers({"B": 1, "E": 2}) == {"B": 0, "E": 2}
-    assert cs.apply_free_offers({"B": 2, "E": 2}) == {"B": 1, "E": 2}
-    assert cs.apply_free_offers({"B": 1, "E": 4}) == {"B": 0, "E": 4}
-    assert cs.apply_free_offers({"B": 2, "E": 4}) == {"B": 0, "E": 4}
-    assert cs.apply_free_offers({"B": 3, "E": 4}) == {"B": 1, "E": 4}
-    assert cs.apply_free_offers({"A": 2, "B": 3, "E": 4}) == {"A": 2, "B": 1, "E": 4}
-
-
 def test_free_items():
     assert cs.checkout("EE") == 80
     assert cs.checkout("EEB") == 80
@@ -92,4 +95,5 @@ def test_mixed_offers():
     assert cs.checkout("AAABEE") == 210
     assert cs.checkout("AAAAABEE") == 280
     assert cs.checkout("BBBEE") == 125
+
 
