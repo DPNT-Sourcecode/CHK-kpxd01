@@ -35,6 +35,10 @@ def test_apply_free_offers():
     assert cs.apply_free_offers({"B": 3, "E": 4}) == {"B": 1, "E": 4}
     assert cs.apply_free_offers({"A": 2, "B": 3, "E": 4}) == {"A": 2, "B": 1, "E": 4}
 
+    assert cs.apply_free_offers({"F": 2}) == {"F": 2}
+    assert cs.apply_free_offers({"F": 3}) == {"F": 2}
+    assert cs.apply_free_offers({"F": 4}) == {"F": 3}
+
 
 def test_get_total_price():
     assert cs.get_total_price({"A": 1}) == 50
@@ -122,3 +126,4 @@ def test_mixed_offers():
     assert cs.checkout("AAABEE") == 210
     assert cs.checkout("AAAAABEE") == 280
     assert cs.checkout("BBBEE") == 125
+

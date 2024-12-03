@@ -1,8 +1,8 @@
-PRICES = {"A": 50, "B": 30, "C": 20, "D": 15, "E": 40}
+PRICES = {"A": 50, "B": 30, "C": 20, "D": 15, "E": 40, "F": 10}
 
 SPECIAL_OFFERS = {
     "DISCOUNTS": {"A": [(3, 130), (5, 200)], "B": [(2, 45)]},
-    "FREE": {"E": [(2, "B", 1)]},
+    "FREE": {"E": [(2, "B", 1)], "F": [(3, "F", 1)]},
 }
 
 
@@ -127,3 +127,4 @@ def checkout(skus):
     total_price = get_total_price(updated_counts)
 
     return total_price
+
