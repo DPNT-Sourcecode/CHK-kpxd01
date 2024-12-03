@@ -122,10 +122,3 @@ def test_mixed_offers():
     assert cs.checkout("AAABEE") == 210
     assert cs.checkout("AAAAABEE") == 280
     assert cs.checkout("BBBEE") == 125
-
-
-
-
-
-
-
