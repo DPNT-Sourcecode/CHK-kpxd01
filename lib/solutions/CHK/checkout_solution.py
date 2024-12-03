@@ -11,9 +11,13 @@ def checkout(skus):
     if skus is None:
         return -1
 
+    # If skus is not a string -> illegal input
+    if not isinstance(skus, str):
+        return -1
+
     for sku in skus:
         # If sku is not in PRICES -> illegal input
-        if not isinstance(sku, str) or sku not in PRICES:
+        if sku not in PRICES:
             return -1
         item_counts[sku] = item_counts.get(sku, 0) + 1
 
@@ -37,4 +41,5 @@ def checkout(skus):
             total_price += count * PRICES[item]
 
     return total_price
+
 

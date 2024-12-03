@@ -21,3 +21,9 @@ def test_empty_string():
     assert cs.checkout("") == 0
 
 
+def test_multiple_items_no_special_offers():
+    assert cs.checkout("AB") == 80
+    assert cs.checkout("ABCD") == 115
+
+
+
