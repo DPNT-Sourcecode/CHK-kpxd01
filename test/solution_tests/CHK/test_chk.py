@@ -13,11 +13,12 @@ def test_invalid_input():
     assert cs.checkout("E") == -1
     assert cs.checkout(0) == -1
     assert cs.checkout("a") == -1
+    assert cs.checkout("0") == -1
     assert cs.checkout("Aa") == -1
     assert cs.checkout("aA") == -1
 
 
-def test_empty_string():
+def test_empty_basket():
     assert cs.checkout("") == 0
 
 
@@ -41,6 +42,7 @@ def test_multiple_items_special_offers():
     assert cs.checkout("AAAABBB") == 255
     assert cs.checkout("AAAAAA") == 260
     assert cs.checkout("AAAAAAA") == 310
+
 
 
 
