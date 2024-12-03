@@ -82,19 +82,24 @@ def get_total_price(item_counts):
     single_discounts = config["specialOffers"]["singleDiscounts"]
     grouped_discounts = config["specialOffers"]["groupedDiscounts"]
 
+    # First we look at the grouped discounts
     for grouped_discount in grouped_discounts:
         group_items = grouped_discount["itemsIncluded"]
         group_quantity = grouped_discount["quantity"]
         group_price = grouped_discount["price"]
 
+        # For each group, we get the amount of items and we sort it from the priciest to the cheapest
         group_counts = [(item, item_counts.get(item, 0)) for item in group_items]
         sorted_group_counts = sorted(
             group_counts, key=lambda x: prices[x[0]], reverse=True
         )
 
+        # We get the total number of items and the number of discounts that can apply
         total_items_group = sum(count for _, count in group_counts)
         total_groups = total_items_group // group_quantity
 
+        # We update the count of items to be processed later on by removing the items included in the discount,
+        # starting from the most expensive
         total_remaining = total_groups * group_quantity
         for item, count in sorted_group_counts:
             if total_remaining == 0:
@@ -104,8 +109,10 @@ def get_total_price(item_counts):
             total_remaining -= items_used
             item_counts[item] = item_counts.get(item, 0) - items_used
 
+        # We update the price, adding the total number of groups multiplied by the group price
         total_price += total_groups * group_price
 
+    # Now we look at each item individually
     for item, count in item_counts.items():
         remaining = count
 
@@ -163,5 +170,6 @@ def checkout(skus):
     total_price = get_total_price(updated_counts)
 
     return total_price
+
 
 
