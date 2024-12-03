@@ -86,6 +86,23 @@ def get_total_price(item_counts):
         group_quantity = grouped_discount["quantity"]
         group_price = grouped_discount["price"]
 
+        group_counts = [(item, item_counts.get(item, 0)) for item in group_items]
+        sorted_group_counts = sorted(group_counts, key=lambda x: x[1], reverse=True)
+
+        total_items_group = sum(count for _, count in group_counts)
+        total_groups = total_items_group // group_quantity
+
+        total_remaining = total_groups * group_quantity
+        for item, count in sorted_group_counts:
+            if total_remaining == 0:
+                break
+
+            items_used = min(count, total_remaining)
+            total_remaining -= items_used
+            item_counts[item] -= items_used
+
+        total_price += total_groups * group_price
+
     for item, count in item_counts.items():
         remaining = count
 
@@ -143,3 +160,4 @@ def checkout(skus):
     total_price = get_total_price(updated_counts)
 
     return total_price
+
