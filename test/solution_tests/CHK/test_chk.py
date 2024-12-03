@@ -73,12 +73,12 @@ def test_apply_free_offers():
     assert cs.apply_free_offers({"Q": 2, "R": 3}) == {"Q": 1, "R": 3}
     assert cs.apply_free_offers({"Q": 3, "R": 6}) == {"Q": 1, "R": 6}
 
-    assert cs.apply_free_offers({"F": 3}) == {"F": 3}
-    assert cs.apply_free_offers({"F": 4}) == {"F": 3}
-    assert cs.apply_free_offers({"F": 5}) == {"F": 4}
-    assert cs.apply_free_offers({"F": 6}) == {"F": 5}
-    assert cs.apply_free_offers({"F": 7}) == {"F": 6}
-    assert cs.apply_free_offers({"F": 8}) == {"F": 6}
+    assert cs.apply_free_offers({"U": 3}) == {"U": 3}
+    assert cs.apply_free_offers({"U": 4}) == {"U": 3}
+    assert cs.apply_free_offers({"U": 5}) == {"U": 4}
+    assert cs.apply_free_offers({"U": 6}) == {"U": 5}
+    assert cs.apply_free_offers({"U": 7}) == {"U": 6}
+    assert cs.apply_free_offers({"U": 8}) == {"U": 6}
 
     assert cs.apply_free_offers({"A": 2, "B": 3, "E": 4}) == {"A": 2, "B": 1, "E": 4}
 
@@ -90,6 +90,26 @@ def test_get_total_price():
     assert cs.get_total_price({"D": 1}) == 15
     assert cs.get_total_price({"E": 1}) == 40
     assert cs.get_total_price({"F": 1}) == 10
+    assert cs.get_total_price({"G": 1}) == 20
+    assert cs.get_total_price({"H": 1}) == 10
+    assert cs.get_total_price({"I": 1}) == 35
+    assert cs.get_total_price({"J": 1}) == 60
+    assert cs.get_total_price({"K": 1}) == 80
+    assert cs.get_total_price({"L": 1}) == 90
+    assert cs.get_total_price({"M": 1}) == 15
+    assert cs.get_total_price({"N": 1}) == 40
+    assert cs.get_total_price({"O": 1}) == 10
+    assert cs.get_total_price({"P": 1}) == 50
+    assert cs.get_total_price({"Q": 1}) == 30
+    assert cs.get_total_price({"R": 1}) == 50
+    assert cs.get_total_price({"S": 1}) == 30
+    assert cs.get_total_price({"T": 1}) == 20
+    assert cs.get_total_price({"U": 1}) == 40
+    assert cs.get_total_price({"V": 1}) == 50
+    assert cs.get_total_price({"W": 1}) == 20
+    assert cs.get_total_price({"X": 1}) == 90
+    assert cs.get_total_price({"Y": 1}) == 10
+    assert cs.get_total_price({"Z": 1}) == 50
 
     assert cs.get_total_price({"A": 3}) == 130
     assert cs.get_total_price({"A": 4}) == 180
@@ -181,5 +201,6 @@ def test_mixed_offers():
     assert cs.checkout("AAAAAFFF") == 220
     assert cs.checkout("BBFFF") == 65
     assert cs.checkout("BEEFFF") == 100
+
 
 
