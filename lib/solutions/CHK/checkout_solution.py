@@ -1,6 +1,9 @@
-PRICES = {"A": 50, "B": 30, "C": 20, "D": 15}
+PRICES = {"A": 50, "B": 30, "C": 20, "D": 15, "E": 40}
 
-SPECIAL_OFFERS = {"A": (3, 130), "B": (2, 45)}
+SPECIAL_OFFERS = {
+    "DISCOUNTS": {"A": [(3, 130), (5, 200)], "B": [(2, 45)]},
+    "FREE": {"E": [(2, "B", 1)]},
+}
 
 
 def checkout(skus):
@@ -35,6 +38,7 @@ def checkout(skus):
     for item, count in item_counts.items():
         # If the item is in the special offers, process special offer first
         if item in SPECIAL_OFFERS:
+
             offer_quantity, offer_price = SPECIAL_OFFERS[item]
 
             # Compute the amount of possible special offers for this item
@@ -49,3 +53,4 @@ def checkout(skus):
             total_price += count * PRICES[item]
 
     return total_price
+
