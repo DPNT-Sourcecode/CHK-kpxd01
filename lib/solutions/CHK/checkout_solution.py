@@ -81,6 +81,8 @@ def checkout(skus):
 
     # Count occurrences of each in skus
     item_counts = get_item_counts(skus)
+    if item_counts == -1:
+        return -1
 
     # First check the items that could provide a free item if part of a special offer
     updated_counts = apply_free_offers(item_counts)
@@ -89,3 +91,4 @@ def checkout(skus):
     total_price = get_total_price(item_counts)
 
     return total_price
+
