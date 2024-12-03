@@ -78,13 +78,20 @@ def get_total_price(item_counts):
         int: an integer representing the total checkout value of the items
     """
     total_price = 0
-    discounts = config["specialOffers"]["discounts"]
+    single_discounts = config["specialOffers"]["singleDiscounts"]
+    grouped_discounts = config["specialOffers"]["groupedDiscounts"]
+
+    for grouped_discount in grouped_discounts:
+        group_items = grouped_discount["itemsIncluded"]
+        group_quantity = grouped_discount["quantity"]
+        group_price = grouped_discount["price"]
+
     for item, count in item_counts.items():
         remaining = count
 
         # If the item is in the special offers, process special offer first
-        if item in discounts:
-            offers = discounts[item]
+        if item in single_discounts:
+            offers = single_discounts[item]
 
             # Sort the orders from the most favorable to the least favorable
             sorted_offers = sorted(offers, key=lambda x: x["price"] / x["quantity"])
@@ -136,3 +143,4 @@ def checkout(skus):
     total_price = get_total_price(updated_counts)
 
     return total_price
+

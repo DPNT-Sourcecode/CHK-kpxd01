@@ -28,7 +28,7 @@
         "Z": 21
     },
     "specialOffers": {
-        "discounts": {
+        "singleDiscounts": {
             "A": [
                 {
                     "quantity": 3,
@@ -136,3 +136,4 @@
         ]
     }
 }
+
