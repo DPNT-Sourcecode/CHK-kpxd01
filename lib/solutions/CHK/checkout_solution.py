@@ -107,6 +107,3 @@ def checkout(skus):
     total_price = get_total_price(updated_counts)
 
     return total_price
-
-
-
