@@ -1,9 +1,7 @@
-PRICES = {"A": 50, "B": 30, "C": 20, "D": 15, "E": 40, "F": 10}
+import json
 
-SPECIAL_OFFERS = {
-    "DISCOUNTS": {"A": [(3, 130), (5, 200)], "B": [(2, 45)]},
-    "FREE": {"E": [(2, "B", 1)], "F": [(3, "F", 1)]},
-}
+with open("pricing_config.json", "r") as f:
+    config = json.load(f)
 
 
 def get_item_counts(skus):
@@ -18,7 +16,7 @@ def get_item_counts(skus):
     item_counts = {}
     for sku in skus:
         # If sku is not in PRICES -> illegal input
-        if sku not in PRICES:
+        if sku not in config["prices"]:
             return {}
         item_counts[sku] = item_counts.get(sku, 0) + 1
 
@@ -38,7 +36,7 @@ def apply_free_offers(item_counts):
     updated_counts = item_counts.copy()
 
     # Check only the items which can provide free items
-    for item, offers in SPECIAL_OFFERS["FREE"].items():
+    for item, offers in config["specialOffers"]["freeItems"].items()
 
         if item in updated_counts:
 
@@ -47,13 +45,15 @@ def apply_free_offers(item_counts):
 
                 # An free offer consists of the quantity of required items bought to trigger the offer,
                 # the item which becomes free and the amount of items that become free per offer
-                buy_quantity_offer, free_item, free_quantity = offer
+                buy_quantity = offer["buyQuantity"]
+                free_item = offer["freeItem"]
+                free_quantity = offer["freeQuantity"]
                 buy_count = updated_counts.get(item, 0)
                 orig_free_item_count = updated_counts.get(free_item, 0)
 
                 # Compute the times we can use the offer and then the total quantity of free items
                 reduced_free_item_count = (
-                    buy_count // buy_quantity_offer
+                    buy_count // buy_quantity
                 ) * free_quantity
 
                 # The count cannot go under 0
@@ -133,3 +133,4 @@ def checkout(skus):
     total_price = get_total_price(updated_counts)
 
     return total_price
+
