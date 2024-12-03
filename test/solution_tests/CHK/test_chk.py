@@ -42,8 +42,3 @@ def test_multiple_items_special_offers():
     assert cs.checkout("AAAABBB") == 255
     assert cs.checkout("AAAAAA") == 260
     assert cs.checkout("AAAAAAA") == 310
-
-
-
-
-
