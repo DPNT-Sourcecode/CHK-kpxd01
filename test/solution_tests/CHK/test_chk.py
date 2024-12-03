@@ -243,5 +243,3 @@ def test_combined_discounts():
     assert cs.checkout("RRRQQQ") == 210
     assert cs.checkout("KKVVVVV") == 340
     assert cs.checkout("PPPPPGGG") == 260
-
-
