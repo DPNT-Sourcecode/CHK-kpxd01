@@ -54,13 +54,33 @@ def test_apply_free_offers():
     assert cs.apply_free_offers({"B": 1, "E": 4}) == {"B": 0, "E": 4}
     assert cs.apply_free_offers({"B": 2, "E": 4}) == {"B": 0, "E": 4}
     assert cs.apply_free_offers({"B": 3, "E": 4}) == {"B": 1, "E": 4}
-    assert cs.apply_free_offers({"A": 2, "B": 3, "E": 4}) == {"A": 2, "B": 1, "E": 4}
 
     assert cs.apply_free_offers({"F": 2}) == {"F": 2}
     assert cs.apply_free_offers({"F": 3}) == {"F": 2}
     assert cs.apply_free_offers({"F": 4}) == {"F": 3}
     assert cs.apply_free_offers({"F": 5}) == {"F": 4}
     assert cs.apply_free_offers({"F": 6}) == {"F": 4}
+
+    assert cs.apply_free_offers({"M": 1, "N": 2}) == {"M": 1, "N": 2}
+    assert cs.apply_free_offers({"M": 1, "N": 3}) == {"M": 0, "N": 3}
+    assert cs.apply_free_offers({"M": 1, "N": 4}) == {"M": 0, "N": 4}
+    assert cs.apply_free_offers({"M": 2, "N": 3}) == {"M": 1, "N": 3}
+    assert cs.apply_free_offers({"M": 3, "N": 6}) == {"M": 1, "N": 6}
+
+    assert cs.apply_free_offers({"Q": 1, "R": 2}) == {"Q": 1, "R": 2}
+    assert cs.apply_free_offers({"Q": 1, "R": 3}) == {"Q": 0, "R": 3}
+    assert cs.apply_free_offers({"Q": 1, "R": 4}) == {"Q": 0, "R": 4}
+    assert cs.apply_free_offers({"Q": 2, "R": 3}) == {"Q": 1, "R": 3}
+    assert cs.apply_free_offers({"Q": 3, "R": 6}) == {"Q": 1, "R": 6}
+
+    assert cs.apply_free_offers({"F": 3}) == {"F": 3}
+    assert cs.apply_free_offers({"F": 4}) == {"F": 3}
+    assert cs.apply_free_offers({"F": 5}) == {"F": 4}
+    assert cs.apply_free_offers({"F": 6}) == {"F": 5}
+    assert cs.apply_free_offers({"F": 7}) == {"F": 6}
+    assert cs.apply_free_offers({"F": 8}) == {"F": 6}
+
+    assert cs.apply_free_offers({"A": 2, "B": 3, "E": 4}) == {"A": 2, "B": 1, "E": 4}
 
 
 def test_get_total_price():
@@ -161,4 +181,5 @@ def test_mixed_offers():
     assert cs.checkout("AAAAAFFF") == 220
     assert cs.checkout("BBFFF") == 65
     assert cs.checkout("BEEFFF") == 100
+
 
