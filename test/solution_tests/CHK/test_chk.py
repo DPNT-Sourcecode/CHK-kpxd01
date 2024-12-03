@@ -7,13 +7,33 @@ def test_get_item_counts():
     assert cs.get_item_counts("B") == {"B": 1}
 
     # Check multiple inputs
-    assert cs.get_item_counts("ABCDEF") == {
+    assert cs.get_item_counts("ABCDEFGHIJKLMNOPQRSTUVWXYZ") == {
         "A": 1,
         "B": 1,
         "C": 1,
         "D": 1,
         "E": 1,
         "F": 1,
+        "G": 1,
+        "H": 1,
+        "I": 1,
+        "J": 1,
+        "K": 1,
+        "L": 1,
+        "M": 1,
+        "N": 1,
+        "O": 1,
+        "P": 1,
+        "Q": 1,
+        "R": 1,
+        "S": 1,
+        "T": 1,
+        "U": 1,
+        "V": 1,
+        "W": 1,
+        "X": 1,
+        "Y": 1,
+        "Z": 1,
     }
     assert cs.get_item_counts("AA") == {"A": 2}
     assert cs.get_item_counts("ABABA") == {"A": 3, "B": 2}
@@ -22,9 +42,9 @@ def test_get_item_counts():
     assert cs.get_item_counts("AC") == {"A": 1, "C": 1}
 
     # Check invalid inputs
-    assert cs.get_item_counts("G") == {}
-    assert cs.get_item_counts("AG") == {}
-    assert cs.get_item_counts("GA") == {}
+    assert cs.get_item_counts("a") == {}
+    assert cs.get_item_counts("Aa") == {}
+    assert cs.get_item_counts("aA") == {}
 
 
 def test_apply_free_offers():
@@ -141,3 +161,4 @@ def test_mixed_offers():
     assert cs.checkout("AAAAAFFF") == 220
     assert cs.checkout("BBFFF") == 65
     assert cs.checkout("BEEFFF") == 100
+
