@@ -121,20 +121,18 @@
                 }
             ]
         },
-        "groupedDiscounts": {
-            [
-                {
-                    "itemsIncluded": [
-                        "S",
-                        "T",
-                        "X",
-                        "Y",
-                        "Z"
-                    ],
-                    "quantity": 3,
-                    "price": 45
-                }
-            ]
-        }
+        "groupedDiscounts": [
+            {
+                "itemsIncluded": [
+                    "S",
+                    "T",
+                    "X",
+                    "Y",
+                    "Z"
+                ],
+                "quantity": 3,
+                "price": 45
+            }
+        ]
     }
 }
