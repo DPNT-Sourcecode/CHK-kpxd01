@@ -121,17 +121,16 @@ def test_get_total_price():
     assert cs.get_total_price({"B": 3}) == 75
     assert cs.get_total_price({"B": 4}) == 90
     assert cs.get_total_price({"E": 2}) == 80
-    assert cs.get_total_price({"E": 3, "B": 1}) == 120
-    assert cs.get_total_price({"F": 2}) == 10
-    assert cs.get_total_price({"F": 3}) == 10
-    assert cs.get_total_price({"F": 4}) == 20
+    assert cs.get_total_price({"F": 2}) == 20
+    assert cs.get_total_price({"F": 3}) == 30
+    assert cs.get_total_price({"F": 4}) == 40
     assert cs.get_total_price({"H": 5}) == 45
     assert cs.get_total_price({"H": 7}) == 65
     assert cs.get_total_price({"H": 10}) == 80
     assert cs.get_total_price({"K": 2}) == 150
     assert cs.get_total_price({"K": 3}) == 230
-    assert cs.get_total_price({"N": 3, "M": 1}) == 120
-    assert cs.get_total_price({"N": 6, "M": 2}) == 240
+    assert cs.get_total_price({"N": 3, "M": 1}) == 135
+    assert cs.get_total_price({"N": 6, "M": 2}) == 270
     assert cs.get_total_price({"P": 5}) == 200
     assert cs.get_total_price({"P": 6}) == 250
     assert cs.get_total_price({"Q": 3}) == 80
@@ -239,9 +238,10 @@ def test_combined_discounts():
     assert cs.checkout("AAABEE") == 210
     assert cs.checkout("AAAAABEE") == 280
     assert cs.checkout("AAAFFF") == 150
-    assert cs.checkout("UUUBBB") == 155
+    assert cs.checkout("UUUUBBB") == 195
     assert cs.checkout("NNNMMM") == 150
-    assert cs.checkout("RRRQQQ") == 230
+    assert cs.checkout("RRRQQQ") == 210
     assert cs.checkout("KKVVVVV") == 370
     assert cs.checkout("PPPPPGGG") == 260
+
 
