@@ -21,9 +21,9 @@ def test_get_item_counts():
     assert cs.get_item_counts("AC") == {"A": 1, "C": 1}
 
     # Check invalid inputs
-    assert cs.get_item_counts("F") == {}
-    assert cs.get_item_counts("AF") == {}
-    assert cs.get_item_counts("FA") == {}
+    assert cs.get_item_counts("G") == {}
+    assert cs.get_item_counts("AG") == {}
+    assert cs.get_item_counts("GA") == {}
 
 
 def test_apply_free_offers():
@@ -38,6 +38,8 @@ def test_apply_free_offers():
     assert cs.apply_free_offers({"F": 2}) == {"F": 2}
     assert cs.apply_free_offers({"F": 3}) == {"F": 2}
     assert cs.apply_free_offers({"F": 4}) == {"F": 3}
+    assert cs.apply_free_offers({"F": 5}) == {"F": 4}
+    assert cs.apply_free_offers({"F": 6}) == {"F": 4}
 
 
 def test_get_total_price():
@@ -126,4 +128,5 @@ def test_mixed_offers():
     assert cs.checkout("AAABEE") == 210
     assert cs.checkout("AAAAABEE") == 280
     assert cs.checkout("BBBEE") == 125
+
 
