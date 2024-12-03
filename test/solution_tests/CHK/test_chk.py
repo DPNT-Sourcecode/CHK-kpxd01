@@ -216,8 +216,8 @@ def test_multiple_items_special_offers():
     assert cs.checkout("AAAAD") == 195
     assert cs.checkout("AAABB") == 175
     assert cs.checkout("AAAABBB") == 255
-    assert cs.checkout("AABBBCC") == 230
-    assert cs.checkout("AAAAAACCCCC") == 450
+    assert cs.checkout("AABBBCC") == 215
+    assert cs.checkout("AAAAAACCCCC") == 350
 
 
 def test_free_items():
@@ -244,3 +244,4 @@ def test_combined_discounts():
     assert cs.checkout("RRRQQQ") == 230
     assert cs.checkout("KKVVVVV") == 370
     assert cs.checkout("PPPPPGGG") == 260
+
