@@ -72,11 +72,14 @@ def get_total_price(item_counts):
     """
     total_price = 0
     for item, count in item_counts.items():
-        # If the item is in the special offers, process special offer first
         remaining = count
+
+        # If the item is in the special offers, process special offer first
         if item in SPECIAL_OFFERS["DISCOUNTS"]:
             offers = SPECIAL_OFFERS["DISCOUNTS"][item]
-            sorted_offers = sorted(offers, key=lambda x: x[0], reverse=True)
+
+            # Sort the orders from the most favorable to the least favorable
+            sorted_offers = sorted(offers, key=lambda x: x[1] / x[0], reverse=True)
             for offer in sorted_offers:
                 offer_quantity, offer_price = offer
 
@@ -121,6 +124,7 @@ def checkout(skus):
     total_price = get_total_price(updated_counts)
 
     return total_price
+
 
 
 
