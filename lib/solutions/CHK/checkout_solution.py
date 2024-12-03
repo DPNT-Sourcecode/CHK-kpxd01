@@ -27,13 +27,14 @@ def get_item_counts(skus):
 
 def apply_free_offers(item_counts):
     updated_counts = item_counts.copy()
-    for item in SPECIAL_OFFERS["FREE"]:
-        buy_quantity_offer, free_item, free_quantity = SPECIAL_OFFERS["FREE"][item]
-        buy_count = item_counts.get(item, 0)
-        orig_free_item_count = item_counts.get(free_item, 0)
-        reduced_free_item_count = (buy_count // buy_quantity_offer) * free_quantity
-        new_free_item_count = max(0, orig_free_item_count - reduced_free_item_count)
-        updated_counts[free_item] = new_free_item_count
+    for item, offers in SPECIAL_OFFERS["FREE"].items():
+        for offer in offers:
+            buy_quantity_offer, free_item, free_quantity = offer
+            buy_count = item_counts.get(item, 0)
+            orig_free_item_count = item_counts.get(free_item, 0)
+            reduced_free_item_count = (buy_count // buy_quantity_offer) * free_quantity
+            new_free_item_count = max(0, orig_free_item_count - reduced_free_item_count)
+            updated_counts[free_item] = new_free_item_count
 
     return updated_counts
 
@@ -84,6 +85,7 @@ def checkout(skus):
             total_price += count * PRICES[item]
 
     return total_price
+
 
 
 
