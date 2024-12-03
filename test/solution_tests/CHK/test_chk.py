@@ -24,7 +24,7 @@ def test_empty_basket():
 
 def test_multiple_items_no_special_offers():
     assert cs.checkout("AB") == 80
-    assert cs.checkout("ABCD") == 115
+    assert cs.checkout("ABCDE") == 155
 
 
 def test_special_offer_discount():
@@ -45,4 +45,18 @@ def test_multiple_items_special_offers():
     assert cs.checkout("AAAAD") == 195
     assert cs.checkout("AAABB") == 175
     assert cs.checkout("AAAABBB") == 255
+
+
+def test_apply_free_offers():
+    assert cs.checkout({"B": 1, "E": 2}) == {"B": 0, "E": 2}
+
+
+def test_free_items():
+    assert cs.checkout("EE") == 80
+    assert cs.checkout("EEB") == 80
+    assert cs.checkout("EEBB") == 70
+    assert cs.checkout("EEEEB") == 160
+    assert cs.checkout("EEEEBB") == 160
+    assert cs.checkout("EEEEBBB") == 190
+
 
