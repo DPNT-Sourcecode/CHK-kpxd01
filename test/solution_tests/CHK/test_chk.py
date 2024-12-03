@@ -48,15 +48,22 @@ def test_multiple_items_special_offers():
 
 
 def test_apply_free_offers():
-    assert cs.checkout({"B": 1, "E": 2}) == {"B": 0, "E": 2}
+    assert cs.apply_free_offers({"B": 0, "E": 2}) == {"B": 0, "E": 2}
+    assert cs.apply_free_offers({"B": 1, "E": 2}) == {"B": 0, "E": 2}
+    assert cs.apply_free_offers({"B": 2, "E": 2}) == {"B": 1, "E": 2}
+    assert cs.apply_free_offers({"B": 1, "E": 4}) == {"B": 0, "E": 4}
+    assert cs.apply_free_offers({"B": 2, "E": 4}) == {"B": 0, "E": 4}
+    assert cs.apply_free_offers({"B": 3, "E": 4}) == {"B": 1, "E": 4}
+    assert cs.apply_free_offers({"A": 2, "B": 3, "E": 4}) == {"A": 2, "B": 1, "E": 4}
 
 
 def test_free_items():
     assert cs.checkout("EE") == 80
     assert cs.checkout("EEB") == 80
-    assert cs.checkout("EEBB") == 70
+    assert cs.checkout("EEBB") == 110
     assert cs.checkout("EEEEB") == 160
     assert cs.checkout("EEEEBB") == 160
     assert cs.checkout("EEEEBBB") == 190
+
 
 

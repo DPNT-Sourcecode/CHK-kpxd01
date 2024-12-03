@@ -88,7 +88,8 @@ def checkout(skus):
     updated_counts = apply_free_offers(item_counts)
 
     # Process each item independently
-    total_price = get_total_price(item_counts)
+    total_price = get_total_price(updated_counts)
 
     return total_price
+
 
