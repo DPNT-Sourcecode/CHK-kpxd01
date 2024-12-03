@@ -39,6 +39,13 @@ def test_special_offer_discount():
     assert cs.checkout("AAAAAAAAAA") == 400
     assert cs.checkout("BBB") == 75
 
+    assert cs.checkout("AAAC") == 150
+    assert cs.checkout("AAAAAD") == 215
+    assert cs.checkout("AAAAAAAAE") == 370
+    assert cs.checkout("AAABB") == 175
+    assert cs.checkout("AAAABBB") == 255
+    assert cs.checkout("AAAABBB") == 255
+
 
 def test_multiple_items_special_offers():
     assert cs.checkout("AAAC") == 150
@@ -64,6 +71,7 @@ def test_free_items():
     assert cs.checkout("EEEEB") == 160
     assert cs.checkout("EEEEBB") == 160
     assert cs.checkout("EEEEBBB") == 190
+
 
 
 
