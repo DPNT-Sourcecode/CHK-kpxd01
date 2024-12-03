@@ -6,6 +6,18 @@ SPECIAL_OFFERS = {
 }
 
 
+def get_item_counts(skus):
+    # Count occurrences of each item in skus
+    item_counts = {}
+    for sku in skus:
+        # If sku is not in PRICES -> illegal input
+        if sku not in PRICES:
+            return -1
+        item_counts[sku] = item_counts.get(sku, 0) + 1
+
+    return item_counts
+
+
 def checkout(skus):
     """Calculate the total price of a number of items
 
@@ -15,7 +27,6 @@ def checkout(skus):
     Returns:
         int: an integer representing the total checkout value of the items, returns -1 if illegal input
     """
-    # Count occurrences of each item in skus
     item_counts = {}
 
     # If skus is None -> illegal input
@@ -26,13 +37,16 @@ def checkout(skus):
     if not isinstance(skus, str):
         return -1
 
-    for sku in skus:
-        # If sku is not in PRICES -> illegal input
-        if sku not in PRICES:
-            return -1
-        item_counts[sku] = item_counts.get(sku, 0) + 1
+    item_counts = get_item_counts(skus)
 
     total_price = 0
+
+
+    # First check the items that could provide a free item if part of a special offer
+    for item in SPECIAL_OFFERS["FREE"]:
+        buy_quantity, free_item, free_quantity = SPECIAL_OFFERS["FREE"][item]
+        free_item_count = 
+
 
     # Process each item independently
     for item, count in item_counts.items():
@@ -53,4 +67,5 @@ def checkout(skus):
             total_price += count * PRICES[item]
 
     return total_price
+
 
