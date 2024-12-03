@@ -19,7 +19,7 @@ def get_item_counts(skus):
     for sku in skus:
         # If sku is not in PRICES -> illegal input
         if sku not in PRICES:
-            return -1
+            return {}
         item_counts[sku] = item_counts.get(sku, 0) + 1
 
     return item_counts
@@ -107,3 +107,4 @@ def checkout(skus):
     total_price = get_total_price(updated_counts)
 
     return total_price
+

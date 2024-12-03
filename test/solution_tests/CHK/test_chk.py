@@ -1,7 +1,20 @@
 from solutions.CHK import checkout_solution as cs
 
+
 def test_get_item_counts():
-    assert cs.get_item_counts("ABCDE") ==
+    assert cs.get_item_counts("ABCDE") == {
+        "A": 1,
+        "B": 1,
+        "C": 1,
+        "D": 1,
+        "E": 1,
+    }
+    assert cs.get_item_counts("A") == {"A": 1}
+    assert cs.get_item_counts("AB") == {"A": 1, "B": 1}
+    assert cs.get_item_counts("BA") == {"A": 1, "B": 1}
+    assert cs.get_item_counts("AC") == {"A": 1, "C": 1}
+    assert cs.get_item_counts("") == {}
+
 
 def test_single_items():
     assert cs.checkout("A") == 50
@@ -79,3 +92,4 @@ def test_mixed_offers():
     assert cs.checkout("AAABEE") == 210
     assert cs.checkout("AAAAABEE") == 280
     assert cs.checkout("BBBEE") == 125
+
