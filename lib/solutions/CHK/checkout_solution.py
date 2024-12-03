@@ -39,6 +39,27 @@ def apply_free_offers(item_counts):
     return updated_counts
 
 
+def get_total_price(item_counts):
+    total_price = 0
+    for item, count in item_counts.items():
+        # If the item is in the special offers, process special offer first
+        remaining = count
+        if item in SPECIAL_OFFERS["DISCOUNTS"]:
+            offers = SPECIAL_OFFERS["DISCOUNTS"][item]
+            sorted_offers = sorted(offers, key=lambda x: x[0], reverse=True)
+            for offer in sorted_offers:
+                offer_quantity, offer_price = offer
+
+                # Compute the amount of possible times we can use this offer
+                n_offers = remaining // offer_quantity
+                total_price += offer_price * n_offers
+                remaining = remaining % offer_quantity
+
+        total_price += remaining * PRICES[item]
+
+    return total_price
+
+
 def checkout(skus):
     """Calculate the total price of a number of items
 
@@ -61,31 +82,10 @@ def checkout(skus):
     # Count occurrences of each in skus
     item_counts = get_item_counts(skus)
 
-    total_price = 0
-
     # First check the items that could provide a free item if part of a special offer
     updated_counts = apply_free_offers(item_counts)
 
     # Process each item independently
-    for item, count in updated_counts.items():
-        # If the item is in the special offers, process special offer first
-        if item in SPECIAL_OFFERS:
-
-            offer_quantity, offer_price = SPECIAL_OFFERS[item]
-
-            # Compute the amount of possible special offers for this item
-            n_offers = count // offer_quantity
-            total_price += offer_price * n_offers
-
-            # Add the remaining items not included in the special offer if necessary
-            remaining = count % offer_quantity
-            total_price += remaining * PRICES[item]
-        # Process the item with no special offer
-        else:
-            total_price += count * PRICES[item]
+    total_price = get_total_price(item_counts)
 
     return total_price
-
-
-
-
