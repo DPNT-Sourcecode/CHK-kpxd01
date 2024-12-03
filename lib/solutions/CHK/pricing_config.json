@@ -1,0 +1,46 @@
+{
+    "prices": {
+        "A": 50,
+        "B": 30,
+        "C": 20,
+        "D": 15,
+        "E": 40,
+        "F": 10
+    },
+    "specialOffers": {
+        "discounts": {
+            "A": [
+                {
+                    "quantity": 3,
+                    "price": 130
+                },
+                {
+                    "quantity": 5,
+                    "price": 200
+                }
+            ],
+            "B": [
+                {
+                    "quantity": 2,
+                    "price": 45
+                }
+            ]
+        },
+        "freeItems": {
+            "E": [
+                {
+                    "buyQuantity": 2,
+                    "freeItem": "B",
+                    "freeQuantity": 1
+                }
+            ],
+            "F": [
+                {
+                    "buyQuantity": 3,
+                    "freeItem": "F",
+                    "freeQuantity": 1
+                }
+            ]
+        }
+    }
+}
