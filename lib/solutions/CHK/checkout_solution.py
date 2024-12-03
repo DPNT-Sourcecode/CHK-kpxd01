@@ -79,7 +79,7 @@ def get_total_price(item_counts):
             offers = SPECIAL_OFFERS["DISCOUNTS"][item]
 
             # Sort the orders from the most favorable to the least favorable
-            sorted_offers = sorted(offers, key=lambda x: x[1] / x[0], reverse=True)
+            sorted_offers = sorted(offers, key=lambda x: x[1] / x[0])
             for offer in sorted_offers:
                 offer_quantity, offer_price = offer
 
@@ -124,6 +124,7 @@ def checkout(skus):
     total_price = get_total_price(updated_counts)
 
     return total_price
+
 
 
 
