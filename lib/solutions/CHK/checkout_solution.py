@@ -1,6 +1,9 @@
 import json
+import os
 
-with open("pricing_config.json", "r") as f:
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+CONFIG_PATH = os.path.join(BASE_DIR, "pricing_config.json")
+with open(CONFIG_PATH, "r") as f:
     config = json.load(f)
 
 
@@ -36,7 +39,7 @@ def apply_free_offers(item_counts):
     updated_counts = item_counts.copy()
 
     # Check only the items which can provide free items
-    for item, offers in config["specialOffers"]["freeItems"].items()
+    for item, offers in config["specialOffers"]["freeItems"].items():
 
         if item in updated_counts:
 
@@ -52,9 +55,7 @@ def apply_free_offers(item_counts):
                 orig_free_item_count = updated_counts.get(free_item, 0)
 
                 # Compute the times we can use the offer and then the total quantity of free items
-                reduced_free_item_count = (
-                    buy_count // buy_quantity
-                ) * free_quantity
+                reduced_free_item_count = (buy_count // buy_quantity) * free_quantity
 
                 # The count cannot go under 0
                 new_free_item_count = max(
@@ -77,24 +78,26 @@ def get_total_price(item_counts):
         int: an integer representing the total checkout value of the items
     """
     total_price = 0
+    discounts = config["specialOffers"]["discounts"]
     for item, count in item_counts.items():
         remaining = count
 
         # If the item is in the special offers, process special offer first
-        if item in SPECIAL_OFFERS["DISCOUNTS"]:
-            offers = SPECIAL_OFFERS["DISCOUNTS"][item]
+        if item in discounts:
+            offers = discounts[item]
 
             # Sort the orders from the most favorable to the least favorable
-            sorted_offers = sorted(offers, key=lambda x: x[1] / x[0])
+            sorted_offers = sorted(offers, key=lambda x: x["price"] / x["quantity"])
             for offer in sorted_offers:
-                offer_quantity, offer_price = offer
+                offer_quantity = offer["quantity"]
+                offer_price = offer["price"]
 
                 # Compute the amount of possible times we can use this offer
                 n_offers = remaining // offer_quantity
                 total_price += offer_price * n_offers
                 remaining = remaining % offer_quantity
 
-        total_price += remaining * PRICES[item]
+        total_price += remaining * config["prices"][item]
 
     return total_price
 
@@ -133,4 +136,5 @@ def checkout(skus):
     total_price = get_total_price(updated_counts)
 
     return total_price
+
 
