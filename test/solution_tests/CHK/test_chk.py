@@ -10,10 +10,14 @@ def test_single_items():
 
 def test_invalid_input():
     assert cs.checkout(None) == -1
-    assert cs.checkout("") == -1
     assert cs.checkout("E") == -1
     assert cs.checkout(0) == -1
     assert cs.checkout("a") == -1
     assert cs.checkout("Aa") == -1
     assert cs.checkout("aA") == -1
+
+
+def test_empty_string():
+    assert cs.checkout("") == 0
+
 

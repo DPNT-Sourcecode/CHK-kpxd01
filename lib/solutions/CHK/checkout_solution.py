@@ -6,9 +6,14 @@ SPECIAL_OFFERS = {"A": (3, 130), "B": (2, 45)}
 def checkout(skus):
     # Count occurrences of each item in skus
     item_counts = {}
+
+    # If skus is None -> illegal input
+    if skus is None:
+        return -1
+
     for sku in skus:
         # If sku is not in PRICES -> illegal input
-        if sku not in PRICES:
+        if not isinstance(sku, str) or sku not in PRICES:
             return -1
         item_counts[sku] = item_counts.get(sku, 0) + 1
 
@@ -32,3 +37,4 @@ def checkout(skus):
             total_price += count * PRICES[item]
 
     return total_price
+
