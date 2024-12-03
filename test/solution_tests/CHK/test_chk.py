@@ -157,7 +157,7 @@ def test_single_items():
     assert cs.checkout("H") == 10
     assert cs.checkout("I") == 35
     assert cs.checkout("J") == 60
-    assert cs.checkout("K") == 80
+    assert cs.checkout("K") == 70
     assert cs.checkout("L") == 90
     assert cs.checkout("M") == 15
     assert cs.checkout("N") == 40
@@ -165,14 +165,14 @@ def test_single_items():
     assert cs.checkout("P") == 50
     assert cs.checkout("Q") == 30
     assert cs.checkout("R") == 50
-    assert cs.checkout("S") == 30
+    assert cs.checkout("S") == 20
     assert cs.checkout("T") == 20
     assert cs.checkout("U") == 40
     assert cs.checkout("V") == 50
     assert cs.checkout("W") == 20
-    assert cs.checkout("X") == 90
-    assert cs.checkout("Y") == 10
-    assert cs.checkout("Z") == 50
+    assert cs.checkout("X") == 17
+    assert cs.checkout("Y") == 20
+    assert cs.checkout("Z") == 21
 
 
 def test_invalid_input():
@@ -203,7 +203,7 @@ def test_special_offer_discount():
     assert cs.checkout("HHHHH") == 45
     assert cs.checkout("HHHHHH") == 55
     assert cs.checkout("HHHHHHHHHH") == 80
-    assert cs.checkout("KK") == 150
+    assert cs.checkout("KK") == 120
     assert cs.checkout("PPPPP") == 200
     assert cs.checkout("QQQ") == 80
     assert cs.checkout("VV") == 90
@@ -241,6 +241,7 @@ def test_combined_discounts():
     assert cs.checkout("UUUUBBB") == 195
     assert cs.checkout("NNNMMM") == 150
     assert cs.checkout("RRRQQQ") == 210
-    assert cs.checkout("KKVVVVV") == 370
+    assert cs.checkout("KKVVVVV") == 340
     assert cs.checkout("PPPPPGGG") == 260
+
 
