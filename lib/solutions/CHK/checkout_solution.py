@@ -10,7 +10,7 @@ def checkout(skus):
         # If sku is not in PRICES -> illegal input
         if sku not in PRICES:
             return -1
-        item_counts[sku] = item_counts[sku].get(sku, 0) + 1
+        item_counts[sku] = item_counts.get(sku, 0) + 1
 
     total_price = 0
 
@@ -32,5 +32,3 @@ def checkout(skus):
             total_price += count * PRICES[item]
 
     return total_price
-
-
