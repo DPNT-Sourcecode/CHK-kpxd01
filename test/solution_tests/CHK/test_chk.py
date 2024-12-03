@@ -1,5 +1,7 @@
 from solutions.CHK import checkout_solution as cs
 
+def test_get_item_counts():
+    assert cs.get_item_counts("ABCDE") ==
 
 def test_single_items():
     assert cs.checkout("A") == 50
@@ -77,6 +79,7 @@ def test_mixed_offers():
     assert cs.checkout("AAABEE") == 210
     assert cs.checkout("AAAAABEE") == 280
     assert cs.checkout("BBBEE") == 125
+
 
 
 
