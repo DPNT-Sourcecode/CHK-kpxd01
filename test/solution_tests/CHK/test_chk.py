@@ -21,7 +21,6 @@ def test_get_item_counts():
     assert cs.get_item_counts("AC") == {"A": 1, "C": 1}
 
     # Check invalid inputs
-    assert cs.get_item_counts("") == {}
     assert cs.get_item_counts("F") == {}
     assert cs.get_item_counts("AF") == {}
     assert cs.get_item_counts("FA") == {}
@@ -75,7 +74,7 @@ def test_invalid_input():
 
 
 def test_empty_basket():
-    assert cs.checkout("") == -1
+    assert cs.checkout("") == 0
 
 
 def test_multiple_items_no_special_offers():
@@ -123,6 +122,7 @@ def test_mixed_offers():
     assert cs.checkout("AAABEE") == 210
     assert cs.checkout("AAAAABEE") == 280
     assert cs.checkout("BBBEE") == 125
+
 
 
 

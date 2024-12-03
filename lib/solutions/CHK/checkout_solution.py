@@ -113,6 +113,9 @@ def checkout(skus):
         return -1
 
     # Count occurrences of each in skus
+    if len(skus) == 0:
+        return 0
+
     item_counts = get_item_counts(skus)
     if len(item_counts) == 0:
         return -1
@@ -124,6 +127,7 @@ def checkout(skus):
     total_price = get_total_price(updated_counts)
 
     return total_price
+
 
 
 
