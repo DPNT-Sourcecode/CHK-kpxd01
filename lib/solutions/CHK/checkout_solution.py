@@ -7,7 +7,14 @@ SPECIAL_OFFERS = {
 
 
 def get_item_counts(skus):
-    # Count occurrences of each item in skus
+    """Count occurrences of each item in skus
+
+    Args:
+        skus (str): a string containing the SKUs of all the products in the basket
+
+    Returns:
+        dict: dictionary containing the amount of items in skus
+    """
     item_counts = {}
     for sku in skus:
         # If sku is not in PRICES -> illegal input
@@ -16,6 +23,19 @@ def get_item_counts(skus):
         item_counts[sku] = item_counts.get(sku, 0) + 1
 
     return item_counts
+
+
+def apply_free_offers(item_counts):
+    updated_counts = item_counts.copy()
+    for item in SPECIAL_OFFERS["FREE"]:
+        buy_quantity_offer, free_item, free_quantity = SPECIAL_OFFERS["FREE"][item]
+        buy_count = item_counts.get(item, 0)
+        orig_free_item_count = item_counts.get(free_item, 0)
+        reduced_free_item_count = (buy_count // buy_quantity_offer) * free_quantity
+        new_free_item_count = max(0, orig_free_item_count - reduced_free_item_count)
+        updated_counts[free_item] = new_free_item_count
+
+    return updated_counts
 
 
 def checkout(skus):
@@ -37,19 +57,16 @@ def checkout(skus):
     if not isinstance(skus, str):
         return -1
 
+    # Count occurrences of each in skus
     item_counts = get_item_counts(skus)
 
     total_price = 0
 
-
     # First check the items that could provide a free item if part of a special offer
-    for item in SPECIAL_OFFERS["FREE"]:
-        buy_quantity, free_item, free_quantity = SPECIAL_OFFERS["FREE"][item]
-        free_item_count = 
-
+    updated_counts = apply_free_offers(item_counts)
 
     # Process each item independently
-    for item, count in item_counts.items():
+    for item, count in updated_counts.items():
         # If the item is in the special offers, process special offer first
         if item in SPECIAL_OFFERS:
 
@@ -67,5 +84,6 @@ def checkout(skus):
             total_price += count * PRICES[item]
 
     return total_price
+
 
 
