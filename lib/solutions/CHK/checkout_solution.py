@@ -40,23 +40,29 @@ def apply_free_offers(item_counts):
     # Check only the items which can provide free items
     for item, offers in SPECIAL_OFFERS["FREE"].items():
 
-        # For each item, we go through all the potential offers
-        for offer in offers:
+        if item in updated_counts:
 
-            # An free offer consists of the quantity of required items bought to trigger the offer,
-            # the item which becomes free and the amount of items that become free per offer
-            buy_quantity_offer, free_item, free_quantity = offer
-            buy_count = item_counts.get(item, 0)
-            orig_free_item_count = item_counts.get(free_item, 0)
+            # For each item, we go through all the potential offers
+            for offer in offers:
 
-            # Compute the times we can use the offer and then the total quantity of free items
-            reduced_free_item_count = (buy_count // buy_quantity_offer) * free_quantity
+                # An free offer consists of the quantity of required items bought to trigger the offer,
+                # the item which becomes free and the amount of items that become free per offer
+                buy_quantity_offer, free_item, free_quantity = offer
+                buy_count = updated_counts.get(item, 0)
+                orig_free_item_count = updated_counts.get(free_item, 0)
 
-            # The count cannot go under 0
-            new_free_item_count = max(0, orig_free_item_count - reduced_free_item_count)
+                # Compute the times we can use the offer and then the total quantity of free items
+                reduced_free_item_count = (
+                    buy_count // buy_quantity_offer
+                ) * free_quantity
 
-            # Update the count for the free item
-            updated_counts[free_item] = new_free_item_count
+                # The count cannot go under 0
+                new_free_item_count = max(
+                    0, orig_free_item_count - reduced_free_item_count
+                )
+
+                # Update the count for the free item
+                updated_counts[free_item] = new_free_item_count
 
     return updated_counts
 
@@ -127,4 +133,5 @@ def checkout(skus):
     total_price = get_total_price(updated_counts)
 
     return total_price
+
 

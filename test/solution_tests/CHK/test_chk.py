@@ -7,12 +7,13 @@ def test_get_item_counts():
     assert cs.get_item_counts("B") == {"B": 1}
 
     # Check multiple inputs
-    assert cs.get_item_counts("ABCDE") == {
+    assert cs.get_item_counts("ABCDEF") == {
         "A": 1,
         "B": 1,
         "C": 1,
         "D": 1,
         "E": 1,
+        "F": 1,
     }
     assert cs.get_item_counts("AA") == {"A": 2}
     assert cs.get_item_counts("ABABA") == {"A": 3, "B": 2}
@@ -48,6 +49,7 @@ def test_get_total_price():
     assert cs.get_total_price({"C": 1}) == 20
     assert cs.get_total_price({"D": 1}) == 15
     assert cs.get_total_price({"E": 1}) == 40
+    assert cs.get_total_price({"F": 1}) == 10
 
     assert cs.get_total_price({"A": 3}) == 130
     assert cs.get_total_price({"A": 4}) == 180
@@ -59,7 +61,7 @@ def test_get_total_price():
     assert cs.get_total_price({"B": 3}) == 75
     assert cs.get_total_price({"B": 4}) == 90
 
-    assert cs.get_total_price({"A": 1, "B": 1, "C": 1, "D": 1, "E": 1}) == 155
+    assert cs.get_total_price({"A": 1, "B": 1, "C": 1, "D": 1, "E": 1, "F": 1}) == 165
 
 
 def test_single_items():
@@ -68,6 +70,7 @@ def test_single_items():
     assert cs.checkout("C") == 20
     assert cs.checkout("D") == 15
     assert cs.checkout("E") == 40
+    assert cs.checkout("F") == 10
 
 
 def test_invalid_input():
@@ -85,7 +88,7 @@ def test_empty_basket():
 
 def test_multiple_items_no_special_offers():
     assert cs.checkout("AB") == 80
-    assert cs.checkout("ABCDE") == 155
+    assert cs.checkout("ABCDEF") == 165
 
 
 def test_special_offer_discount():
@@ -123,10 +126,21 @@ def test_free_items():
     assert cs.checkout("EEEEBB") == 160
     assert cs.checkout("EEEEBBB") == 190
 
+    assert cs.checkout("FF") == 20
+    assert cs.checkout("FFF") == 20
+    assert cs.checkout("FFFF") == 30
+    assert cs.checkout("FFFFF") == 40
+    assert cs.checkout("FFFFFF") == 40
+
 
 def test_mixed_offers():
     assert cs.checkout("AAABEE") == 210
     assert cs.checkout("AAAAABEE") == 280
     assert cs.checkout("BBBEE") == 125
+    assert cs.checkout("AAAFFF") == 150
+    assert cs.checkout("AAAAAFFF") == 220
+    assert cs.checkout("BBFFF") == 65
+    assert cs.checkout("BEEFFF") == 100
+
 
 
